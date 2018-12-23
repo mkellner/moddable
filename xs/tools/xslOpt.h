@@ -18,8 +18,8 @@
  *
  */
 
-#ifndef __XST__
-#define __XST__
+#ifndef __XSLOPT__
+#define __XSLOPT__
 
 #if defined(_MSC_VER)
 	#if defined(_M_IX86) || defined(_M_X64)
@@ -83,7 +83,8 @@
 	#define mxUseLinuxFutex 1
 	#define mxMachinePlatform \
 		txSocket connection; \
-		void* host;
+		void* host; \
+		txCallback fakeCallback;
 #elif mxWindows
 	#include <winsock2.h>
 	typedef SOCKET txSocket;
@@ -93,7 +94,8 @@
 		void* host; \
 		void* waiterCondition; \
 		void* waiterData; \
-		txMachine* waiterLink;
+		txMachine* waiterLink; \
+		txCallback fakeCallback;
 #else
 	#include <fcntl.h>
 	#include <arpa/inet.h>
@@ -110,16 +112,14 @@
 		void* host; \
 		void* waiterCondition; \
 		void* waiterData; \
-		txMachine* waiterLink;
+		txMachine* waiterLink; \
+		txCallback fakeCallback;
 #endif
 
-#define mxUseDefaultBuildKeys 1
 #define mxUseDefaultChunkAllocation 1
 #define mxUseDefaultSlotAllocation 1
 #define mxUseDefaultHostCollection 1
-#define mxUseDefaultFindModule 1
-#define mxUseDefaultLoadModule 1
-#define mxUseDefaultParseScript 1
+#define mxUseDefaultQueuePromiseJobs 1
 #define mxUseDefaultSharedChunks 1
 
-#endif /* __XST__ */
+#endif /* __XSLOPT__ */
